@@ -1,13 +1,17 @@
-#include <Engine.h>
 #include <gtest/gtest.h>
 
 #include <iostream>
 
-// Basic test to check if the engine can be initialized
-TEST(EngineTest, Initialization) {
-	Pinni::Engine gameEngine;
-	// Just testing if initialization doesn't crash
-	ASSERT_NO_THROW({
-		gameEngine.print();
-	});
+#include <Pinni.h>
+
+class Mock : public Pinni::Application {};
+
+Pinni::Application* CreateApplication() {
+	return new Mock();
+}
+
+TEST(PinniTest, SmokeTest) {
+	auto app = CreateApplication();
+	EXPECT_TRUE(app->SmokeTest());
+	delete app;
 }

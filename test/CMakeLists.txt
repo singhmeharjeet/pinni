@@ -1,11 +1,8 @@
-
-enable_testing()
-include(CTest)
+project(${CMAKE_PROJECT_NAME})
 
 find_package(GTest REQUIRED)
 
-file(GLOB TEST_SOURCES "${PROJECT_SOURCE_DIR}/test/*_test.cpp")
-
+file(GLOB TEST_SOURCES "${CMAKE_SOURCE_DIR}/test/*_test.cpp")
 
 # ---------------------------------------------------------
 set(test_name unit_tests)
@@ -15,20 +12,17 @@ target_link_libraries(${test_name} gtest::gtest Pinni)
 target_include_directories( ${test_name}
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-add_test(${test_name} ${test_name})
+add_test(${test_name} ${CMAKE_CURRENT_BINARY_DIR}/${test_name})
 
 # ---------------------------------------------------------
+
 # create_test_sourcelist (Tests "00_driver.cpp" ${TEST_SOURCES})
-
 # add_executable(unit_tests ${Tests})
-
 # target_link_libraries(unit_tests gtest::gtest Pinni)
-
 # foreach (test ${TEST_SOURCES})
 #   get_filename_component (TName ${test} NAME_WE)
 #   add_test (NAME ${TName} COMMAND unit_tests ${TName})
 # endforeach ()
-
 
 # ---------------------------------------------------------
 
